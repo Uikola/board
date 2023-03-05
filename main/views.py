@@ -1,4 +1,6 @@
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.views import LoginView, LogoutView
 from django.http import Http404, HttpResponse
 from django.shortcuts import render
 from django.template import TemplateDoesNotExist
@@ -19,3 +21,12 @@ def other_page(request, page):
 
 class BbLoginView(LoginView):
     template_name = 'main/login.html'
+
+
+@login_required
+def profile(request):
+    return render(request, 'main/profile.html')
+
+
+class BbLogoutView(LoginRequiredMixin, LogoutView):
+    template_name = 'main/logout.html'
