@@ -18,9 +18,11 @@
     </header>
     <div class="row">
         <ul class="col nav justify-content-end border">
+            {% if not user.is_authenticated %}
             <li class="nav-item">
                 <a href="{% url 'main:register' %}" class="nav-link">Регистрация</a>
             </li>
+            {% endif %}
             {% if user.is_authenticated %}
             <li class="nav-item dropdown">
                 <a href="#"
@@ -35,7 +37,7 @@
                     <div class="dropdown-divider"></div>
                     <a href="{% url 'main:logout' %}" class="dropdown-item">Выйти</a>
                     <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">Удалить</a>
+                    <a href="{% url 'main:profile_delete' %}" class="dropdown-item">Удалить</a>
                 </div>
             </li>
             {% else %}
