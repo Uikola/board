@@ -4,8 +4,19 @@
 {% load static %}
 {% load bootstrap4 %}
 
+{% block title %}{{ rubric }}{% endblock %}
+
 {% block content %}
-    Последние 10 объявлений
+    <h2 class="mb-2">{{ rubric }}</h2>
+    <div class="container-fluid mb-2">
+        <div class="row">
+            <div class="col">&nbsp;</div>
+            <form class="col-md-auto form-inline">
+                {% bootstrap_form form show_label=False %}
+                {% bootstrap_button content='Искать' button_type='submit' %}
+            </form>
+        </div>
+    </div>
     {% if bbs %}
         <ul class="list-unstyled">
             {% for bb in bbs %}
@@ -27,5 +38,6 @@
                 </li>
             {% endfor %}
         </ul>
-    {% endif %}
+        {% bootstrap_pagination page url=keyword %}
+    {% endif %} 
 {% endblock %}
